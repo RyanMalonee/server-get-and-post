@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Assignment 14 - Server Get and Post</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <h1>Cities Around the World</h1>
+    <div class="flex-container">
+      <div class="column flex-container" id="cities"></div>
+      <div class="column" id="details"></div>
+    </div>
+    <button id="addCity">Add City</button>
+    <form id="add-city-form" method="POST">
+      <p>
+        <label for="cityName">City Name: </label>
+        <input type="text" id="cityName" />
+      </p>
+      <p>
+        <label for="country">Country: </label>
+        <input type="text" id="country" />
+      </p>
+      <p>
+        <label for="population">Population: </label>
+        <input type="number" id="population" />
+      </p>
+      <p>
+        <label for="prominentLanguage">Prominent Language: </label>
+        <input type="text" id="prominentLanguage" />
+      </p>
+      <p>
+        <label for="landmarks">Landmarks: </label>
+        <a href="#" id="add-landmark-button">Add Landmark</a>
+      </p>
+      <div id="landmark-inputs"></div>
+      <p>
+        <button type="submit">Submit!</button>
+      </p>
+    </form>
+    <script src="script.js"></script>
+  </body>
+</html>
