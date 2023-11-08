@@ -1,8 +1,14 @@
+// Used class file to determine what packages were needed
+// and how to use them within the file
 const express = require("express");
 const app = express();
+const joi = require("joi");
+const multer = require("multer");
 app.use(express.static("public"));
 app.use(express.json());
-const joi = require("joi");
+const cors = require("cors");
+app.use(cors());
+const upload = multer({ dest: __dirname + "/public/images" });
 
 app.listen(3000, () => {
   console.log("Listening");
@@ -64,6 +70,40 @@ let cities = [
       "Tokyo's Tsukiji Fish Market was once the world's largest seafood market.",
   },
 ];
+
+app.post("/api/cities", upload.single("img"), (req, res) => {
+  const result = validateCity(req.body);
+
+  if (result.error) {
+    res.status(400).send(result.error.details[0].message);
+    return;
+  }
+
+  const newCity = {
+    name: req.body.name,
+    country: req.body.country,
+    population: req.body.population,
+    prominentLanguage: req.body.prominentLanguage,
+    landmarks: req.body.landmarks.split(","),
+    funFact: req.body.funFact,
+  };
+
+  cities.push(newCity);
+  res.send(cities);
+});
+
+const validateCity = (city) => {
+  const citySchema = joi.object({
+    name: joi.string().min(4).required(),
+    country: joi.string().min(2).required(),
+    population: joi.number().min(1).required(),
+    prominentLanguage: joi.string().min(4).required(),
+    landmarks: joi.string().min(4).required(),
+    funFact: joi.string().required(),
+  });
+
+  return citySchema.validate(city);
+};
 
 app.get("/api/cities", (req, res) => {
   res.send(cities);

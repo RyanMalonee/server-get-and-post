@@ -1,3 +1,4 @@
+// Gets the cities from the server
 const getCities = async () => {
   try {
     const response = await fetch("api/cities/");
@@ -8,7 +9,9 @@ const getCities = async () => {
   }
 };
 
+// Shows the city names in the list of cities box
 const showCities = async () => {
+  document.getElementById("cities").innerHTML = "";
   let cities = await getCities();
   cities.forEach((city) => {
     const section = document.createElement("section");
@@ -25,6 +28,7 @@ const showCities = async () => {
   });
 };
 
+// Displays the City details in the Details box
 displayDetails = (city) => {
   document.getElementById("details").innerHTML = "";
   const section = document.createElement("section");
@@ -59,26 +63,49 @@ displayDetails = (city) => {
 
   section.append(landmarks);
 
+  const funFact = document.createElement("p");
+  funFact.innerHTML = `Fun Fact: ${city.funFact}`;
+  section.append(funFact);
+
   document.getElementById("details").append(section);
 };
 
-const showForm = () => {
-  document.getElementById("add-city-form").classList.toggle("hide");
+// Adds a city to the server via the form
+const addCity = async (e) => {
+  e.preventDefault();
+  let response;
+
+  const form = document.getElementById("add-city-form");
+  const formData = new FormData(form);
+  formData.append("name", document.getElementById("cityName").value);
+  formData.append("country", document.getElementById("country").value);
+  formData.append("population", document.getElementById("population").value);
+  formData.append(
+    "prominentLanguage",
+    document.getElementById("prominentLanguage").value
+  );
+  formData.append("landmarks", document.getElementById("landmarks").value);
+  formData.append("funFact", document.getElementById("funFact").value);
+  console.log(...formData);
+  response = await fetch("/api/cities", {
+    method: "POST",
+    body: formData,
+  });
+
+  // Waits until the city has been added to the server before it is shown
+  response = await response.json();
+  showCities();
+  document.getElementById("add-city-form").reset();
 };
 
-const addCity = () => {};
-
-const addLandmarkInput = (e) => {
-  e.preventDefault();
-  const inputs = document.getElementById("landmark-inputs");
-  const input = document.createElement("input");
-  input.type = "text";
-  inputs.appendChild(input);
+// shows and hides the form
+const showForm = () => {
+  document.getElementById("add-city-form").classList.toggle("hide");
 };
 
 window.onload = () => {
   showCities();
   document.getElementById("addCity").onclick = showForm;
   document.getElementById("add-city-form").onsubmit = addCity;
-  document.getElementById("add-landmark-button").onclick = addLandmarkInput;
+  document.getElementById("form-submit-button").onsubmit = addCity;
 };
