@@ -1,4 +1,9 @@
 /* Structure */
+:root {
+  --background: #c4e1f2;
+  --columns: #85c8f2;
+  --cities: #1d3759;
+}
 body,
 html {
   margin: 0;
@@ -6,16 +11,16 @@ html {
 }
 
 body {
-  background: lightgrey;
+  background: var(--background);
 }
 
 .column {
   margin: 20px;
-  background-color: blanchedalmond;
+  background-color: var(--columns);
 }
 
 #cities section {
-  background-color: beige;
+  background-color: var(--cities);
   padding: 30px;
   text-align: center;
 }
@@ -36,7 +41,7 @@ body {
 }
 
 #add-city-form {
-  background-color: antiquewhite;
+  background-color: var(--columns);
   width: 50%;
   margin: 10px auto;
   border-radius: 3px;
@@ -47,26 +52,39 @@ body {
   margin: 5px;
 }
 
-#landmark-inputs {
-  padding: 10px;
-}
-
-#landmark-inputs input {
-  margin: 3px;
-  margin-top: 0px;
-}
-
 #add-city-form label {
   display: inline-block;
   width: 100px;
 }
 
-#landmark-inputs input {
-  display: block;
+#add-city-form input {
+  width: 200px;
+  height: 30px;
 }
 
 #add-city-form h1 {
   padding: 10px;
+}
+
+#cities a {
+  cursor: pointer;
+}
+
+#exit-button {
+  display: inline;
+  float: right;
+  margin-right: 10px;
+  margin-top: 5px;
+  cursor: pointer;
+}
+
+#exit-button:hover {
+  color: var(--background);
+}
+
+#result {
+  text-align: center;
+  font-size: 1.4em;
 }
 
 /*Typography*/
@@ -80,7 +98,7 @@ h1 {
 
 #cities section a {
   text-decoration: none;
-  color: black;
+  color: white;
   font-size: 1.5em;
 }
 

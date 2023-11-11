@@ -76,6 +76,7 @@ const addCity = async (e) => {
   let response;
 
   const form = document.getElementById("add-city-form");
+  const result = document.getElementById("result");
   const formData = new FormData(form);
   formData.append("name", document.getElementById("cityName").value);
   formData.append("country", document.getElementById("country").value);
@@ -86,26 +87,40 @@ const addCity = async (e) => {
   );
   formData.append("landmarks", document.getElementById("landmarks").value);
   formData.append("funFact", document.getElementById("funFact").value);
-  console.log(...formData);
   response = await fetch("/api/cities", {
     method: "POST",
     body: formData,
   });
 
-  // Waits until the city has been added to the server before it is shown
-  response = await response.json();
-  showCities();
+  if (response.status == 400) {
+    result.innerHTML = "Error: your city was not added";
+    setTimeout(() => {
+      result.innerHTML = "";
+    }, 3000);
+  } else {
+    // Waits until the city has been added to the server before it is shown
+    response = await response.json();
+    showCities();
+    result.innerHTML = "City added successfully";
+    setTimeout(() => {
+      result.innerHTML = "";
+    }, 3000);
+  }
   document.getElementById("add-city-form").reset();
 };
 
 // shows and hides the form
 const showForm = () => {
-  document.getElementById("add-city-form").classList.toggle("hide");
+  document.getElementById("add-city-form").classList.remove("hide");
+};
+
+const hideForm = () => {
+  document.getElementById("add-city-form").classList.add("hide");
 };
 
 window.onload = () => {
   showCities();
   document.getElementById("addCity").onclick = showForm;
   document.getElementById("add-city-form").onsubmit = addCity;
-  document.getElementById("form-submit-button").onsubmit = addCity;
+  document.getElementById("exit-button").onclick = hideForm;
 };
