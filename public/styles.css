@@ -8,15 +8,24 @@ body,
 html {
   margin: 0;
   padding: 0;
+  max-width: 100%;
 }
 
 body {
   background: var(--background);
 }
 
+button {
+  cursor: pointer;
+}
+
 .column {
   margin: 20px;
   background-color: var(--columns);
+}
+
+.column:not(#cities section):not(#details section) {
+  box-shadow: 8px 10px var(--cities);
 }
 
 #cities section {
@@ -27,7 +36,23 @@ body {
 
 #addCity {
   margin-left: 20px;
+  background-color: var(--cities);
+  border: 3px solid white;
+  width: 150px;
+  max-width: 100%;
   padding: 10px;
+}
+
+#form-submit-button {
+  background-color: var(--cities);
+  border: 3px solid white;
+  width: 200px;
+  height: 40px;
+}
+
+#addCity:hover {
+  background: var(--columns);
+  color: black;
 }
 
 #form {
@@ -45,6 +70,7 @@ body {
   width: 50%;
   margin: 10px auto;
   border-radius: 3px;
+  text-align: center;
 }
 
 #add-city-form p {
@@ -54,12 +80,17 @@ body {
 
 #add-city-form label {
   display: inline-block;
-  width: 100px;
+  width: 225px;
 }
 
 #add-city-form input {
-  width: 200px;
+  width: 300px;
   height: 30px;
+}
+
+#add-city-form input,
+#add-city-form label {
+  max-width: 100%;
 }
 
 #add-city-form h1 {
@@ -82,6 +113,11 @@ body {
   color: var(--background);
 }
 
+#form-submit-button:hover {
+  background: var(--background);
+  color: black;
+}
+
 #result {
   text-align: center;
   font-size: 1.4em;
@@ -90,6 +126,10 @@ body {
 /*Typography*/
 body {
   font-family: Arial, Helvetica, sans-serif;
+}
+
+#title {
+  font-size: 2.5em;
 }
 
 h1 {
@@ -113,6 +153,17 @@ h1 {
 
 #addCity {
   font-size: large;
+  color: white;
+}
+
+#add-city-form label {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+#form-submit-button {
+  font-size: large;
+  color: white;
 }
 
 /* Larger Resolutions */
