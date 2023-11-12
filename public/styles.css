@@ -13,6 +13,7 @@ html {
 
 body {
   background: var(--background);
+  text-align: center;
 }
 
 button {
@@ -28,19 +29,32 @@ button {
   box-shadow: 8px 10px var(--cities);
 }
 
+#cities,
+#details {
+  padding: 5px;
+  min-height: 400px;
+}
+
 #cities section {
   background-color: var(--cities);
   padding: 30px;
   text-align: center;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
+  transition: 0.3s;
+}
+
+#cities section:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.8);
 }
 
 #addCity {
-  margin-left: 20px;
   background-color: var(--cities);
-  border: 3px solid white;
-  width: 150px;
+  border: 2px solid white;
+  border-radius: 2px;
+  width: 250px;
   max-width: 100%;
   padding: 10px;
+  margin: 5px;
 }
 
 #form-submit-button {
@@ -62,15 +76,20 @@ button {
 }
 
 .hide {
-  visibility: hidden;
+  display: none;
 }
 
 #add-city-form {
-  background-color: var(--columns);
+  background-color: var(--cities);
+  border: 2px solid white;
   width: 50%;
   margin: 10px auto;
   border-radius: 3px;
   text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 #add-city-form p {
@@ -153,6 +172,10 @@ h1 {
 
 #addCity {
   font-size: large;
+  color: white;
+}
+
+#add-city-form {
   color: white;
 }
 

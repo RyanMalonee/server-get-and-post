@@ -94,6 +94,7 @@ const addCity = async (e) => {
 
   if (response.status == 400) {
     result.innerHTML = "Error: your city was not added";
+    result.style.color = "red";
     setTimeout(() => {
       result.innerHTML = "";
     }, 3000);
@@ -102,6 +103,7 @@ const addCity = async (e) => {
     response = await response.json();
     showCities();
     result.innerHTML = "City added successfully";
+    result.style.color = "green";
     setTimeout(() => {
       result.innerHTML = "";
     }, 3000);
