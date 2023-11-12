@@ -113,11 +113,17 @@ const addCity = async (e) => {
 
 // shows and hides the form
 const showForm = () => {
+  document.getElementById("add-city-form").classList.remove("fade-out");
   document.getElementById("add-city-form").classList.remove("hide");
+  document.getElementById("add-city-form").classList.add("fade-in");
 };
 
 const hideForm = () => {
-  document.getElementById("add-city-form").classList.add("hide");
+  document.getElementById("add-city-form").classList.remove("fade-in");
+  document.getElementById("add-city-form").classList.add("fade-out");
+  setTimeout(() => {
+    document.getElementById("add-city-form").classList.add("hide");
+  }, 500);
 };
 
 window.onload = () => {
